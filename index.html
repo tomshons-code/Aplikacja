@@ -1,11 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator - Tomasz Przyjemski</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Strona główna kalkulatora</h2>
+
+    <!-- Prosty formularz – na razie tylko placeholder -->
+    <form action="{{ url_for('calculate') }}" method="POST">
+        <label for="num1">Pierwsza liczba:</label>
+        <input type="text" name="num1" placeholder="np. 10" />
+
+        <label for="num2">Druga liczba:</label>
+        <input type="text" name="num2" placeholder="np. 5" />
+
+        <label for="operation">Operacja:</label>
+        <select name="operation">
+            <option value="add">Dodawanie</option>
+            <option value="subtract">Odejmowanie</option>
+            <option value="multiply">Mnożenie</option>
+            <option value="divide">Dzielenie</option>
+        </select>
+
+        <button type="submit">Oblicz</button>
+    </form>
+
+    <!-- Sekcja na ewentualny wynik; wyświetlamy tylko, jeśli jest dostępny -->
+    {% if result %}
+        <div class="result">
+            <p>Wynik: {{ result }}</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
